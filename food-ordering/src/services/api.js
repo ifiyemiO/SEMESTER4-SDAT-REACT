@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:8080", // API base URL
+  baseURL: "http://localhost:8080/New-FoodOrdering/menuitems/all", // API base URL
   headers: {
     "Content-Type": "application/json",
   },

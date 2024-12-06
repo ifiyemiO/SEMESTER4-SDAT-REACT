@@ -1,15 +1,44 @@
-import React from "react";
-import FoodList from "./components/FoodList";
-import OrderForm from "./components/OrderForm";
-import OrderList from "./components/OrderList";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Menu from "./components/Menu";
+import Order from "./components/Order";
+import "./styles.css";
 
 function App() {
+  const [orderItems, setOrderItems] = useState([]);
+
+  const addToOrder = (item) => {
+    setOrderItems((prevItems) => [...prevItems, item]);
+  };
+
   return (
-    <div className="App">
-      <FoodList />
-      <OrderForm />
-      <OrderList />
-    </div>
+    <Router>
+      <header>
+        <h1>Cafe Delight</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/menu">Menu</a>
+            </li>
+            <li>
+              <a href="/order">Order</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/menu" element={<Menu addToOrder={addToOrder} />} />
+        <Route path="/order" element={<Order orderItems={orderItems} />} />
+      </Routes>
+      <footer>
+        <p>&copy; 2024 Cafe Delight</p>
+      </footer>
+    </Router>
   );
 }
 
